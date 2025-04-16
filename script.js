@@ -1,14 +1,29 @@
 document.getElementById('generateButton').addEventListener('click', function() {
-  // Get the text input value
   let text = document.getElementById('textInput').value;
 
-  // If text is entered, simulate APK generation
   if (text.trim() !== '') {
-    // Simulate APK generation (you would replace this with actual backend interaction)
-    setTimeout(function() {
-      document.getElementById('apkLinkSection').style.display = 'block';
-      document.getElementById('apkLink').href = 'https://example.com/your-apk-file.apk'; // Replace with actual APK URL
-    }, 2000); // Simulate delay
+    // Actual backend call
+    fetch('https://text-to-apk-backend.onrender.com/generate-apk', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ text: text })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data && data.apk_url) {
+        document.getElementById('apkLinkSection').style.display = 'block';
+        document.getElementById('apkLink').href = data.apk_url;
+      } else {
+        alert('APK generate nahi ho saka.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Server se connect nahi ho saka.');
+    });
+
   } else {
     alert('Please enter some text to generate the APK.');
   }
