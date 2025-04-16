@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text to APK Generator</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to APK App Generator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Text to APK Generator</h1>
-        <textarea id="textInput" placeholder="Enter text here..."></textarea>
-        <button id="generateButton">Generate APK</button>
 
-        <div id="apkLinkSection" style="display: none;">
-            <p>Your APK is ready! <a id="apkLink" href="#">Download APK</a></p>
-        </div>
+  <!-- Main Container -->
+  <div class="container">
+    <h1>Text to APK App Generator</h1>
+
+    <!-- Text Input Form -->
+    <div class="input-section">
+      <label for="textInput">Enter Text:</label>
+      <textarea id="textInput" placeholder="Enter your app text here..."></textarea>
+      <button id="generateButton">Generate APK</button>
     </div>
 
-    <script src="script.js"></script>
+    <!-- APK Link -->
+    <div class="apk-link" id="apkLinkSection" style="display:none;">
+      <h2>Your APK is ready!</h2>
+      <a href="#" id="apkLink" target="_blank">Download APK</a>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2025 Text to APK. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
