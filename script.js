@@ -1,8 +1,8 @@
-document.getElementById('generateButton').addEventListener('click', function() {
+document.getElementById('generateButton').addEventListener('click', function () {
   let text = document.getElementById('textInput').value;
 
   if (text.trim() !== '') {
-    // Actual backend call
+    // Backend API call
     fetch('/api/generate-apk', {
       method: 'POST',
       headers: {
@@ -10,19 +10,25 @@ document.getElementById('generateButton').addEventListener('click', function() {
       },
       body: JSON.stringify({ text: text })
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data && data.apk_url) {
-        document.getElementById('apkLinkSection').style.display = 'block';
-        document.getElementById('apkLink').href = data.apk_url;
-      } else {
-        alert('APK generate nahi ho saka.');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert('Server se connect nahi ho saka.');
-    });
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Server error');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data && data.apk_url) {
+          document.getElementById('apkLinkSection').style.display = 'block';
+          document.getElementById('apkLink').href = data.apk_url;
+          document.getElementById('apkLink').textContent = 'Download APK';
+        } else {
+          alert('Backend ne koi APK link return nahi kiya.');
+        }
+      })
+      .catch(error => {
+        console.error('Fetch error:', error);
+        alert('Server se connection nahi ho saka. Please try again later.');
+      });
 
   } else {
     alert('Please enter some text to generate the APK.');
