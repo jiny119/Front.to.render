@@ -3,7 +3,7 @@ document.getElementById('generateButton').addEventListener('click', function() {
 
   if (text.trim() !== '') {
     // Actual backend call
-    fetch('https://text-to-apk-backend.vercel.app/api/generate-apk', {
+    fetch('/api/generate-apk', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
